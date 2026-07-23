@@ -1,0 +1,15 @@
+node_modules/
+.pnpm-store/
+dist/
+coverage/
+target/
+.calluwu/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+.idea/
+.vscode/
+tmp/
+artifacts/

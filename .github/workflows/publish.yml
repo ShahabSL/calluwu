@@ -1,0 +1,91 @@
+name: Publish public packages
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment: npm
+    steps:
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
+        with:
+          version: 11.9.0
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+      - uses: dtolnay/rust-toolchain@4cda84d5c5c54efe2404f9d843567869ab1699d4 # stable
+        with:
+          toolchain: 1.96.0
+          components: clippy,rustfmt
+      - name: Pin an OIDC-capable npm CLI
+        run: npm install --global npm@12.0.1
+      - name: Pin the Rust license policy tool
+        run: cargo install cargo-deny --locked --version 0.19.4
+      - name: Pin the Rust vulnerability audit tool
+        run: cargo install cargo-audit --locked --version 0.22.2
+      - name: Require the tag to identify the reviewed main tip
+        run: |
+          main_sha="$(git rev-parse refs/remotes/origin/main)"
+          tag_sha="$(git rev-list -n 1 "$GITHUB_REF")"
+          test "$tag_sha" = "$GITHUB_SHA"
+          test "$GITHUB_SHA" = "$main_sha"
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm audit --prod
+      - run: cargo audit --deny warnings
+      - run: pnpm check
+      - name: Block HIGH or CRITICAL source, secret, and configuration findings
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          scan-type: fs
+          scan-ref: .
+          scanners: vuln,secret,misconfig
+          version: v0.72.0
+          severity: HIGH,CRITICAL
+          exit-code: "1"
+          format: table
+      - name: Prepare SBOM artifact directory
+        run: mkdir -p artifacts
+      - name: Generate CycloneDX release source SBOM
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          scan-type: fs
+          scan-ref: .
+          scanners: vuln
+          version: v0.72.0
+          format: cyclonedx
+          output: artifacts/calluwu-source.cdx.json
+      - name: Upload release SBOM
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: calluwu-public-release-sbom-${{ github.ref_name }}
+          path: artifacts/calluwu-source.cdx.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Verify tag and package publication contract
+        run: node scripts/verify-release-version.mjs "$GITHUB_REF_NAME"
+      - name: Build reviewed package tarballs
+        run: |
+          mkdir release-artifacts
+          pnpm --filter @calluwu/types pack --pack-destination "$GITHUB_WORKSPACE/release-artifacts"
+          pnpm --filter @calluwu/webrtc-client pack --pack-destination "$GITHUB_WORKSPACE/release-artifacts"
+          pnpm --filter @calluwu/sdk pack --pack-destination "$GITHUB_WORKSPACE/release-artifacts"
+      - name: Publish with npm trusted publishing and provenance
+        run: node scripts/publish-public-packages.mjs "${GITHUB_REF_NAME#v}"

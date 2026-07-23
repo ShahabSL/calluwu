@@ -1,0 +1,53 @@
+[package]
+name = "calluwu-core"
+description = "Calluwu's bounded, provider-neutral realtime voice-agent runtime"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+name = "calluwu_core"
+path = "src/lib.rs"
+
+[[bin]]
+name = "calluwu-runtime"
+path = "src/main.rs"
+
+[dependencies]
+anyhow = "1.0.100"
+async-stream = "0.3.6"
+async-trait = "0.1.89"
+axum = { version = "0.8.9", features = ["http1", "json", "tokio", "ws"] }
+base64 = "0.22.1"
+bytes = "1.11.0"
+chrono = { version = "0.4.42", default-features = false, features = ["clock", "serde", "std"] }
+clap = { version = "4.6.0", features = ["derive", "env"] }
+futures-util = { version = "0.3.31", features = ["sink"] }
+reqwest = { version = "0.12.24", default-features = false, features = ["json", "rustls-tls", "stream"] }
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.145"
+sha2 = "0.10.8"
+thiserror = "2.0.17"
+tokio = { version = "1.53.0", features = ["fs", "macros", "net", "rt-multi-thread", "signal", "sync", "time"] }
+tokio-util = "0.7.18"
+tower-http = { version = "0.7.0", features = ["catch-panic", "request-id", "trace"] }
+tracing = "0.1.41"
+tracing-subscriber = { version = "0.3.20", features = ["env-filter", "fmt", "json"] }
+uuid = { version = "1.18.1", features = ["serde", "v7"] }
+
+[dev-dependencies]
+criterion = { version = "0.5.1", features = ["async_tokio"] }
+proptest = "1.9.0"
+tempfile = "3.23.0"
+tokio-tungstenite = "0.28.0"
+tokio = { version = "1.53.0", features = ["test-util"] }
+tower = { version = "0.5.2", features = ["util"] }
+
+[[bench]]
+name = "latency"
+harness = false
+
+[lints]
+workspace = true

@@ -1,0 +1,34 @@
+{
+  "providerModel": {
+    "scalar": "💡",
+    "utf8BytesPerScalar": 4,
+    "maximumBytes": 160,
+    "validRepeat": 40,
+    "invalidRepeat": 41
+  },
+  "realtimeMessageId": {
+    "scalar": "💡",
+    "utf8BytesPerScalar": 4,
+    "maximumBytes": 160,
+    "validRepeat": 40,
+    "invalidRepeat": 41
+  },
+  "realtimeInputText": {
+    "scalar": "💡",
+    "utf8BytesPerScalar": 4,
+    "maximumBytes": 16000,
+    "validRepeat": 4000,
+    "invalidRepeat": 4001
+  },
+  "realtimeSessionEndReason": {
+    "scalar": "💡",
+    "utf8BytesPerScalar": 4,
+    "maximumBytes": 500,
+    "validRepeat": 125,
+    "invalidRepeat": 126
+  },
+  "unknownWireField": {
+    "name": "unexpected",
+    "value": "must-reject"
+  }
+}

@@ -1,0 +1,14 @@
+# The production image is built from the repository root. Deny the whole
+# context first so credentials, Git history, dependency trees, build outputs,
+# and unrelated application sources can never be uploaded to a builder.
+**
+
+!Cargo.toml
+!Cargo.lock
+!rust-toolchain.toml
+!runtime/
+!runtime/calluwu-core/
+!runtime/calluwu-core/Cargo.toml
+!runtime/calluwu-core/Dockerfile
+!runtime/calluwu-core/src/
+!runtime/calluwu-core/src/**
