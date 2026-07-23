@@ -90,6 +90,19 @@ export const ApiKeyMetadataSchema = z.object({
   rotatedFromKeyId: ResourceIdSchema.nullable(),
 });
 
+export const PrincipalMetadataSchema = z
+  .object({
+    keyId: ResourceIdSchema,
+    organizationId: ResourceIdSchema,
+    projectId: ResourceIdSchema.nullable(),
+    scopes: z
+      .array(ApiKeyScopeSchema)
+      .min(1)
+      .max(ApiKeyScopeSchema.options.length)
+      .refine((values) => new Set(values).size === values.length, "Scopes must be unique"),
+  })
+  .strict();
+
 export const ProjectResponseSchema = z.object({ project: ProjectSchema });
 export const ProjectListResponseSchema = z.object({ projects: z.array(ProjectSchema) });
 export const DeploymentResponseSchema = z.object({ deployment: DeploymentSchema });
@@ -132,6 +145,7 @@ export const ApiKeyResponseSchema = z.object({ apiKey: ApiKeyMetadataSchema });
 export const ApiKeyListResponseSchema = z.object({
   apiKeys: z.array(ApiKeyMetadataSchema).max(200),
 });
+export const PrincipalResponseSchema = z.object({ principal: PrincipalMetadataSchema }).strict();
 const ApiKeyIssuedResponseSchema = ApiKeyResponseSchema.extend({
   credentialAlreadyIssued: z.literal(false),
   credential: z.string().min(32).max(1_024),
@@ -163,6 +177,8 @@ export type CreateSessionRequest = z.infer<typeof CreateSessionRequestSchema>;
 export type CreateApiKeyRequest = z.infer<typeof CreateApiKeyRequestSchema>;
 export type RotateApiKeyRequest = z.infer<typeof RotateApiKeyRequestSchema>;
 export type ApiKeyMetadata = z.infer<typeof ApiKeyMetadataSchema>;
+export type PrincipalMetadata = z.infer<typeof PrincipalMetadataSchema>;
+export type PrincipalResponse = z.infer<typeof PrincipalResponseSchema>;
 export type ApiKeyCredentialResponse = z.infer<typeof ApiKeyCredentialResponseSchema>;
 export type ApiKeyRotationResponse = z.infer<typeof ApiKeyRotationResponseSchema>;
 export type EventListResponse = z.infer<typeof EventListResponseSchema>;
