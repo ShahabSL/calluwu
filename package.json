@@ -16,7 +16,7 @@
     "build:rust": "cargo build --workspace --all-targets",
     "calluwu": "node packages/sdk/dist/cli.js",
     "check": "pnpm run licenses && pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build",
-    "clean": "pnpm -r clean",
+    "clean": "pnpm -r run clean",
     "format": "biome check --write packages examples scripts && cargo fmt --all",
     "format:check": "biome check packages examples scripts && cargo fmt --all --check",
     "licenses": "pnpm licenses:node && pnpm licenses:rust",
