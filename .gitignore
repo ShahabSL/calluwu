@@ -4,6 +4,7 @@ dist/
 coverage/
 target/
 .calluwu/
+.secrets/
 .env
 .env.*
 !.env.example
