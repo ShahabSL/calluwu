@@ -5,6 +5,7 @@ export const EventTypeSchema = z.enum([
   "session.created",
   "session.provisioning",
   "session.ready",
+  "runtime.ready",
   "session.started",
   "session.interrupted",
   "session.canceled",
