@@ -133,7 +133,7 @@
     },
     {
       "path": "package.json",
-      "sha256": "a1f12d1196755f845b0a6ba63dce79ed13303544ff3faa6fc7d8d2d57b4b818c",
+      "sha256": "aac678011de68e1f968d43b314afb363cf38f608eb7460e8360ea39da7142c24",
       "mode": "0644"
     },
     {
@@ -243,7 +243,7 @@
     },
     {
       "path": "packages/types/src/api.ts",
-      "sha256": "8f127f1a1f181a51a48ec954714d08685dae47ef08cc9597693f83ca78dd3b71",
+      "sha256": "92d00f5dbbe52ba27ffe3a69d855864aaf6dbf32fa3b8f4ddc41241012849b3b",
       "mode": "0644"
     },
     {
