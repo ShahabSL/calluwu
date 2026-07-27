@@ -56,10 +56,12 @@ const COMPONENT_FILES = pathList(`
   packages/types/src/domain.ts
   packages/types/src/events.ts
   packages/types/src/index.ts
+  packages/types/src/intake.ts
   packages/types/src/primitives.ts
   packages/types/src/realtime.ts
   packages/types/test/contracts.test.ts
   packages/types/test/fixtures/unicode-boundaries.json
+  packages/types/test/intake.test.ts
   packages/types/tsconfig.build.json
   packages/types/tsconfig.json
   packages/webrtc-client/README.md

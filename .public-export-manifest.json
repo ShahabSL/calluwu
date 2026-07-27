@@ -38,7 +38,7 @@
     },
     {
       "path": ".gitignore",
-      "sha256": "a77346d77ef0b2eefc3b217f553f3d3e2d455c0db5ad8ba7cb8760242a1f9d17",
+      "sha256": "18cf22b8cd24adf2a7da58ca80c001e09a256965df5a0545e3e5fc6e9b42bffc",
       "mode": "0644"
     },
     {
@@ -258,7 +258,12 @@
     },
     {
       "path": "packages/types/src/index.ts",
-      "sha256": "a3edae01c975e54be1bc6a93619187f0a263d6843a26a6da0cae9a553f01291d",
+      "sha256": "9204a88355e213ff308cf3c303a75a720b117a1c3fe3926afccacd5b787c1842",
+      "mode": "0644"
+    },
+    {
+      "path": "packages/types/src/intake.ts",
+      "sha256": "1b48e5ebcc15647b7067c6de437eed94c159f484eabf187325fa1249800db63a",
       "mode": "0644"
     },
     {
@@ -279,6 +284,11 @@
     {
       "path": "packages/types/test/fixtures/unicode-boundaries.json",
       "sha256": "cfe4ae2bcbbbcd028bc5895395a7bde8c2c79f36cad5eddbe0234b88af837de5",
+      "mode": "0644"
+    },
+    {
+      "path": "packages/types/test/intake.test.ts",
+      "sha256": "9bb8cd2f99ef498414a4b89f6622c4b54270bf2a7b2b879c3ac96d4a321c0b21",
       "mode": "0644"
     },
     {
@@ -463,7 +473,7 @@
     },
     {
       "path": "scripts/export-public.mjs",
-      "sha256": "617a33309c03e2ddb7a46978755b5411e03e00754f86323f1f80f59be49c9503",
+      "sha256": "1b8575f8074fe13497d6d2a66b0490088f4cd5abcc3d99b0a5fe6ef16a5fb6e2",
       "mode": "0755"
     },
     {
