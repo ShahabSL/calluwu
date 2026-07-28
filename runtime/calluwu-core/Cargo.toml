@@ -41,7 +41,7 @@ uuid = { version = "1.18.1", features = ["serde", "v7"] }
 criterion = { version = "0.5.1", features = ["async_tokio"] }
 proptest = "1.9.0"
 tempfile = "3.23.0"
-tokio-tungstenite = "0.28.0"
+tokio-tungstenite = "0.29.0"
 tokio = { version = "1.53.0", features = ["test-util"] }
 tower = { version = "0.5.2", features = ["util"] }
 
