@@ -42,7 +42,7 @@ jobs:
           format: cyclonedx
           output: artifacts/calluwu-source.cdx.json
       - name: Upload source SBOM
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: calluwu-public-source-sbom-${{ github.sha }}
           path: artifacts/calluwu-source.cdx.json
@@ -110,7 +110,7 @@ jobs:
           format: cyclonedx
           output: artifacts/calluwu-runtime.cdx.json
       - name: Upload runtime image SBOM
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: calluwu-public-runtime-sbom-${{ github.sha }}
           path: artifacts/calluwu-runtime.cdx.json
