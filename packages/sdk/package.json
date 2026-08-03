@@ -37,8 +37,8 @@
     "esbuild": "^0.28.1"
   },
   "devDependencies": {
-    "@types/node": "^22.18.1",
-    "typescript": "^5.9.3",
+    "@types/node": "^26.1.2",
+    "typescript": "^7.0.2",
     "vitest": "^4.1.10"
   },
   "engines": {
