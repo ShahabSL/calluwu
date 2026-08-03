@@ -29,8 +29,8 @@
     "typecheck": "pnpm build:workspace-packages && pnpm -r typecheck"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.4",
-    "typescript": "^5.9.3",
+    "@biomejs/biome": "^2.5.6",
+    "typescript": "^7.0.2",
     "vitest": "^4.1.10"
   }
 }
